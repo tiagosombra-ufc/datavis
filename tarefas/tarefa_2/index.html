@@ -46,7 +46,9 @@
         </div>
 
         <div class="summary">
-            <p> Para conseguir setar as cores no mesmo ou próximo do gradiente do gerado pelo tableau, fui buscar ajuda no site: <a href="http://colorbrewer2.org" target="_blank">ColorBrewer </a> para pegar os valores rgb's das cores das colunas, logo em seguida tive que setar as opções de cores através do Highcharts.setoptions().</p>
+            <p> Para conseguir setar as cores no mesmo ou próximo do gradiente do gerado pelo tableau, fui buscar ajuda no site: <a href="http://colorbrewer2.org" target="_blank">ColorBrewer </a> para pegar os valores rgb's das cores das colunas, logo em seguida tive que setar as opções de cores através do Highcharts.setOptions({
+                        colors: ['#023858', '#034e7b', '#0570b0', '#0570b0', '#74a9cf', '#74a9cf', '#d0d1e6', '#d0d1e6']
+                    });. </p>
         </div>
 
         <script>
@@ -64,7 +66,7 @@
                     text: 'Número de Oscars por Gênero'
                 },
                 xAxis:{
-                    categories:['Gêneros']
+                    categories:['Gênero']
                 },
                 yAxis:{
                     title:{
