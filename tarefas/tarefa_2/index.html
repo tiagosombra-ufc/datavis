@@ -148,7 +148,7 @@
             $(function () {
 
                     Highcharts.setOptions({
-                        colors: ['#023858', '#034e7b', '#0570b0', '#0570b0', '#74a9cf', '#74a9cf', '#d0d1e6', '#d0d1e6']
+                        colors: ['#67a9cf', '#ef8a62']
                     });
 
               $('#container2').highcharts({
@@ -173,25 +173,15 @@
                 }
             }
         },
-        legend: {
-            layout: 'vertical',
-            align: 'right',
-            verticalAlign: 'top',
-            x: -40,
-            y: 80,
-            floating: true,
-            borderWidth: 1,
-            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
-            shadow: true
-        },
         credits: {
             enabled: false
         },
               series: [{
-            data: [29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
+                  name: 'EUA',
+            data: [2023, 947.1, 770.81, 648.16, 690.2, 468.58, 554.34, 434.2, 476.24, 389.03]
         }, {
-            data: [216.4, 194.1, 95.6, 54.4, 29.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5],
-            lineWidth: 5
+            name:'Fora dos EUA',
+            data: [760.5, 381, 352.4, 415, 334.2, 530.9, 336.5, 402.1, 322.7, 319.3]
         }]
               });
             });
