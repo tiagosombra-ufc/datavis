@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+         <meta charset="utf-8">
+        <title>Tarefa 2</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Tiago Sombra">
+        <!-- Le HTML5 shim, for IE6-8 support of HTML elements -->
+        <!--[if lt IE 9]> <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script> <![endif]-->
+        <!-- Le styles -->
+
+              <!-- Le styles -->
+<link href='/assets/stylesheets/bootstrap.min-94fce5e5aa478be3fb4e3720a7649fd6.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/style-e89e38ca7352347d9af551e55c682440.css' type='text/css' rel='stylesheet' media='all'>
+<link href='/assets/stylesheets/sons-of-obsidian-7a6afe6c29d9408e4a6ce27939d10ec4.css' type='text/css' rel='stylesheet' media='all'>
+    <!-- Le fav and touch icons -->
+
+        <!-- Inclusões das bibliotecas JavaScript para o Highcharts -->
+        <script src="https://code.jquery.com/jquery-1.12.0.min.js"></script>
+        <script src="http://code.highcharts.com/highcharts.js"></script>
+    </head>
+    <body>
+
+     <body>
+     <div class="navbar">
+      <div class="navbar-inner">
+        <div class="container-narrow">
+            <a class="brand" href='/'>Visualização Científica</a>
+              <ul class="nav">
+                <li class="active"><a href="/tarefas/tarefas.html" class="active">Tarefas</a></li>
+                <li><a href="/trabalhos/trabalhos.html">Trabalhos</a></li>              
+             
+              </ul>
+         </div>
+       </div>
+     </div>
+
+       <div class="container-narrow">
+        <div class="content">
+            <div class="page-header">
+            <h1>Tarefa 2</h1>
+        </div>
+        
+        <h2 id="grafico1">Número de Oscars por Gênero</h2>
+        <div class="summary">
+            <p> O primeiro gráfico mostra a relação entre os gêneros e os oscars, ou seja, a quantidade de oscars ganhos pelos os filmes, da nossa lista de filmes, divido por gênero.</p>
+        </div>
+
+        <div class="summary">
+            <p> Para conseguir setar as cores no mesmo ou próximo do gradiente do gerado pelo tableau, fui buscar ajuda no site: <a href="http://colorbrewer2.org" target="_blank">ColorBrewer </a> para pegar os valores rgb's das cores das colunas, logo em seguida tive que setar as opções de cores através do Highcharts.setOptions({
+                        colors: ['#023858', '#034e7b', '#0570b0', '#0570b0', '#74a9cf', '#74a9cf', '#d0d1e6', '#d0d1e6']
+                    });, desta forma as cores foram setados de acordo com seu valor. </p>
+        </div>
+        
+         <div class="summary">
+            <p> Uma das difilcudades encontradas foi setar os valores de cada barra logo acima dela, apesar de adicionado no código fonte, não consegui fazer com que os valores ficassem visíveis. Outra mudança foi na forma de mostrar os nomes de cada barra, foi incluida uma caixa dentro do gráfico, desta forma, economizando espaço na página.</p>
+        </div>
+
+        <script>
+            $(function () {
+
+                    Highcharts.setOptions({
+                        colors: ['#023858', '#034e7b', '#0570b0', '#0570b0', '#74a9cf', '#74a9cf', '#d0d1e6', '#d0d1e6']
+                    });
+
+              $('#container').highcharts({
+                chart:{
+                    type:'column'
+                },
+                title:{
+                    text: 'Número de Oscars por Gênero'
+                },
+                xAxis:{
+                    categories:['Gênero']
+                },
+                yAxis:{
+                    title:{
+                        text: 'Número de Oscars'
+                    }
+                },
+                  plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'right',
+            verticalAlign: 'top',
+            x: -40,
+            y: 80,
+            floating: true,
+            borderWidth: 1,
+            backgroundColor: ((Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF'),
+            shadow: true
+        },
+        credits: {
+            enabled: false
+        },
+                series:[{
+                    name: 'Drama',
+                    data: [15]
+                },{
+                    name: 'Biografia',
+                    data: [7]
+                },{
+                   name: 'Animação',
+                    data: [3] 
+                },{
+                    name: 'Crime',
+                    data: [3]
+                },{
+                    name: 'Comedia',
+                    data: [2]
+                },{
+                    name: 'Triller',
+                    data: [2]
+                },{
+                    name: 'Aventura',
+                    data: [1]
+                },{
+                    name: 'Romance',
+                    data: [1]
+                }]
+              });
+            });
+            </script>
+        
+        <div id="container" style="width:100%; height:400px;"></div>
+
+        <hr>
+      
+    </div> <!-- /container -->
+    
+     <h2 id="grafico2">Filmes com as melhores arrecadações nos EUA em 2011</h2>
+
+         <div class="summary">
+            <p> No segundo gráfico (logo abaixo) temos os 10 filmes que mais arrecadaram em 2011, um gráfico de linhas mostra os valores ordenados, na qual o filme Avatar foi o que mais arrecadou com valores próximos do dobro para o segundo colocado. 
+            Analisando os outros filmes, comparando os valores arrecados nos EUA e fora dos EUA, temos uma tendência de valores maoires dentro dos EUA, em que apenas um filme da lista, o filme The Dark Knight, teve arrecadação fora dos EUA maior.</p>
+        </div>
+        
+         <div class="summary">
+            <p>Para construir o gráfico as dificuldades encontradas foram para setar os nomes dos filmes em paralelo, mas como os nomes são grandes eles ficaram em perpendicular, o que é default do highcharts. 
+            Outro ponto que posso destacar é que as cores usadas foram estraídas mais uma vez do <a href="http://colorbrewer2.org" target="_blank">ColorBrewer </a>. 
+            Para finalizar é importante ressaltar que  usar highcharts facilita bastante a criação dos gráficos ele é bastante completo e configurável e a comunidade é bastante ativa o que facilita a busca para tirar dúvidas pontuais.</p>
+        </div>
+
+        <script>
+            $(function () {
+
+                    Highcharts.setOptions({
+                        colors: ['#67a9cf', '#ef8a62']
+                    });
+
+              $('#container2').highcharts({
+                chart:{
+                    type:'line'
+                },
+                title:{
+                    text: '10 filmes com as melhores arrecadações nos EUA x Fora dos EUA'
+                },
+                xAxis:{
+                    categories:['Avatar', 'Harry Potter and the Deathly Hallows Part 2', 'Transformers: Dark of the Moon', 'Toy Story 3', 'Alice in Wonderland', 'The Dark Knight', 'Spider-Man 3', 'Transformers: Revenge of the Fallen', 'Shrek the Third', 'Transformers']
+                },
+                yAxis:{
+                    title:{
+                        text: 'Arrecadação'
+                    }
+                },
+                  plotOptions: {
+            bar: {
+                dataLabels: {
+                    enabled: true
+                }
+            }
+        },
+        credits: {
+            enabled: false
+        },
+              series: [{
+                  name: 'EUA',
+            data: [2023, 947.1, 770.81, 648.16, 690.2, 468.58, 554.34, 434.2, 476.24, 389.03]
+        }, {
+            name:'Fora dos EUA',
+            data: [760.5, 381, 352.4, 415, 334.2, 530.9, 336.5, 402.1, 322.7, 319.3]
+        }]
+              });
+            });
+            </script>
+        
+        <div id="container2" style="width:100%; height:400px;"></div>
+
+        <hr>
+      <div class="footer">
+        <p>&copy; Tiago Sombra 2016</p>
+      </div>
+    </div> <!-- /container -->
+
+    </body>
+</html>
