@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Web_d3_dc</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="author" content="Tiago Sombra">
+    <link href='../../assets/stylesheets/bootstrap.min-94fce5e5aa478be3fb4e3720a7649fd6.css' type='text/css' rel='stylesheet'
+        media='all'>
+    <link href='../../assets/stylesheets/style-e89e38ca7352347d9af551e55c682440.css' type='text/css' rel='stylesheet' media='all'>
+    <link href='../../assets/stylesheets/sons-of-obsidian-7a6afe6c29d9408e4a6ce27939d10ec4.css' type='text/css' rel='stylesheet'
+        media='all'>
+    <script src="js/crossfilter.js" charset="utf-8"></script>
+    <script src="https://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+    <script src="js/dc.js" charset="utf-8"></script>
+
+
+</head>
+
+<body>
+    <div id="block">
+        <div class="container-narrow">
+            <div class="content">
+                <div class="page-header">
+                    <h1>Web_d3_dc</h1>
+                </div>
+                <div id="pagework">
+                    <div id="pageworkdescription">
+                        <p style="float:left">
+                            Ano (dimensão) x Arrecadação (grupo).
+                        </p>
+                        <center>
+                            <div id="chartBar1" style="border: 1px solid #eee; padding: 10px; display:block;"></div>
+                        </center>
+                        <br><br>
+
+                        <p style="float:left">
+                            Genero (dimensão) x Arrecadação (grupo).
+                        </p>
+                        <center>
+                            <div id="chartBar2" style="border: 1px solid #eee; padding: 10px;display:block;"></div>
+                        </center>
+                        <br>
+
+
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    var fluctuationChart = dc.barChart('#chartBar1');
+            var fluctuationChart2 = dc.barChart('#chartBar2');
+            d3.json("movies.json", function(error, data){
+            data.forEach(function(d){
+                d.Year = +d.Year;
+                d.Worldwide_Gross_M = +d.Worldwide_Gross_M;
+                d.Budget_M = +d.Budget_M;
+            });
+            
+            var facts = crossfilter(data);
+            var yearDim = facts.dimension(function(d){
+                return d.Year;
+            });
+            var genreDim = facts.dimension(function(d){
+                return d.Genre;
+            });
+            var WorldwideByYearGroup = yearDim.group().reduceSum(function(d){
+                return d.Worldwide_Gross_M;
+            });
+            var WorldwideByGenreGroup = genreDim.group().reduceSum(function(d){
+                return d.Worldwide_Gross_M;
+            });
+            
+            
+           
+    fluctuationChart
+        .colors(['#3182bd', '#6baed6', '#9ecae1', '#c6dbef', '#dadaeb'])
+        .colorDomain([-1750, 1000])
+        .colorAccessor(function(d, i){return d.value;})
+        .width(620)
+        .height(480)
+        .margins({top: 20, right: 50, bottom: 30, left: 40})
+        .dimension(yearDim)
+        .group(WorldwideByYearGroup)        
+        .centerBar(true)
+        .alwaysUseRounding(true)
+        .renderHorizontalGridLines(true)
+        .x(d3.scale.linear().domain([2006, 2012]))
+        .gap(15)
+        .xAxisLabel('Year')
+        .yAxisLabel('Worldwide Gross');
+       
+      fluctuationChart.xAxis().tickFormat(d3.format("d"));
+      fluctuationChart.yAxis().tickFormat(d3.format("d"));
+    
+   fluctuationChart2
+        .width(620)
+        .height(380)
+        .margins({top: 20, right: 50, bottom: 30, left: 40})
+        .dimension(genreDim)        
+        .renderHorizontalGridLines(true)
+        .x(d3.scale.ordinal().domain(genreDim))
+        .xUnits(dc.units.ordinal)
+        .gap(15)
+        .centerBar(false)
+        .group(WorldwideByGenreGroup)
+        .xAxisLabel('Genre')
+        .yAxisLabel('Worldwide Gross')
+        .ordering();       
+       
+      fluctuationChart2.yAxis().tickFormat(d3.format("d"));
+      
+        dc.renderAll();
+		});
+                </script>
+
+
+</body>
+
+</html>
